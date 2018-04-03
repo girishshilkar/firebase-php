@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH.'third_party/vendor/autoload.php';
+//require APPPATH.'libraries/vendor/autoload.php';
 
 const DEFAULT_URL = 'https://test-99db3.firebaseio.com/';
 const DEFAULT_TOKEN = 'DSVW60D3GXWMbGi9yKhv2wmaIVbW5H4PPdCX2jhd';
