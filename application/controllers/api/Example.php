@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
 require APPPATH . 'libraries/REST_Controller.php';
+require APPPATH . 'libraries/vendor/autoload.php';
 
 /**
  * This is an example of a few basic user interaction methods you could use
@@ -17,7 +18,8 @@ require APPPATH . 'libraries/REST_Controller.php';
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Example extends REST_Controller {
+class Example extends REST_Controller
+{
 
     function __construct()
     {
@@ -29,6 +31,8 @@ class Example extends REST_Controller {
         $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
+//        firebase class instance
+        $this->firebase = new Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
     }
 
     public function users_get()
@@ -44,16 +48,12 @@ class Example extends REST_Controller {
 
         // If the id parameter doesn't exist return all the users
 
-        if ($id === NULL)
-        {
+        if ($id === NULL) {
             // Check if the users data store contains users (in case the database result returns NULL)
-            if ($users)
-            {
+            if ($users) {
                 // Set the response and exit
                 $this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-            }
-            else
-            {
+            } else {
                 // Set the response and exit
                 $this->response([
                     'status' => FALSE,
@@ -64,11 +64,10 @@ class Example extends REST_Controller {
 
         // Find and return a single record for a particular user.
 
-        $id = (int) $id;
+        $id = (int)$id;
 
         // Validate the id.
-        if ($id <= 0)
-        {
+        if ($id <= 0) {
             // Invalid id, set the response and exit.
             $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
@@ -78,23 +77,17 @@ class Example extends REST_Controller {
 
         $user = NULL;
 
-        if (!empty($users))
-        {
-            foreach ($users as $key => $value)
-            {
-                if (isset($value['id']) && $value['id'] === $id)
-                {
+        if (!empty($users)) {
+            foreach ($users as $key => $value) {
+                if (isset($value['id']) && $value['id'] === $id) {
                     $user = $value;
                 }
             }
         }
 
-        if (!empty($user))
-        {
+        if (!empty($user)) {
             $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-        }
-        else
-        {
+        } else {
             $this->set_response([
                 'status' => FALSE,
                 'message' => 'User could not be found'
@@ -117,11 +110,10 @@ class Example extends REST_Controller {
 
     public function users_delete()
     {
-        $id = (int) $this->get('id');
+        $id = (int)$this->get('id');
 
         // Validate the id.
-        if ($id <= 0)
-        {
+        if ($id <= 0) {
             // Set the response and exit
             $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
@@ -133,6 +125,25 @@ class Example extends REST_Controller {
         ];
 
         $this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
+    }
+
+    public function firebase_get()
+    {
+        $test = array(
+            "foo" => "bar",
+            "i_love" => "lamp",
+            "id" => 42,
+            "nested-array" => array(1,2,3,4,5,6,7,8)
+        );
+        $dateTime = new DateTime();
+        $this->firebase->set(DEFAULT_PATH . '/' . $dateTime->format('c'), $test);
+
+// --- storing a string ---
+        $this->firebase->set(DEFAULT_PATH . '/name/contact001', "John d");
+
+// --- reading the stored string ---
+        $name = $this->firebase->get(DEFAULT_PATH . '/name/');
+        $this->set_response(json_decode($name), REST_Controller::HTTP_OK);
     }
 
 }

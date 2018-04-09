@@ -94,6 +94,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
     </p>
 </div>
-
 </body>
 </html>
