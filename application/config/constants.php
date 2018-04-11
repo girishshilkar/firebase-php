@@ -85,6 +85,6 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 /*  App constants */
-define('DEFAULT_URL', 'https://bidwin-34db6.firebaseio.com/');
-define('DEFAULT_TOKEN', 'AIzaSyBCRGDpz5waFax4tn0CGo8FjMoARP86ZNQ');
-define('DEFAULT_PATH', '/test');
+define('DEFAULT_URL', 'https://bidwin-34db6.firebaseio.com/'); // firebase URL
+define('DEFAULT_TOKEN', 'KJKFktmMBsEplUxRR6e4KXEKf7dcWD6oAVcpcyo1'); // firebase token
+define('API_URL', 'http://localhost/bidwin/api/'); // rest API URL

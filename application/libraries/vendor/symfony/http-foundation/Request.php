@@ -347,8 +347,8 @@ class Request
             $server['HTTP_HOST'] = $server['HTTP_HOST'].':'.$components['port'];
         }
 
-        if (isset($components['user'])) {
-            $server['PHP_AUTH_USER'] = $components['user'];
+        if (isset($components['User'])) {
+            $server['PHP_AUTH_USER'] = $components['User'];
         }
 
         if (isset($components['pass'])) {
@@ -1039,7 +1039,7 @@ class Request
      * Relative URLs from one resource to another are useful when generating self-contained downloadable document archives.
      * Furthermore, they can be used to reduce the link size in documents.
      *
-     * Example target paths, given a base path of "/a/b/c/d":
+     * Users target paths, given a base path of "/a/b/c/d":
      * - "/a/b/c/d"     -> ""
      * - "/a/b/c/"      -> "./"
      * - "/a/b/"        -> "../"

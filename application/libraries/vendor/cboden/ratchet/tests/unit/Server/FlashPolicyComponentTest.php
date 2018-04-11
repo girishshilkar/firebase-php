@@ -102,7 +102,7 @@ class FlashPolicyTest extends \PHPUnit_Framework_TestCase {
           , array(false, '516-')
           , array(true, '516-523,11')
           , array(false, '516,-523,11')
-          , array(false, 'example')
+          , array(false, 'User')
           , array(false, 'asdf,123')
           , array(false, '--')
           , array(false, ',,,')

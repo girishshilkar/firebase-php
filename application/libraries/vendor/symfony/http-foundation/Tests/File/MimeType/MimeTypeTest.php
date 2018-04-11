@@ -63,7 +63,7 @@ class MimeTypeTest extends TestCase
             $this->markTestSkipped('Can not verify chmod operations on Windows');
         }
 
-        if (!getenv('USER') || 'root' === getenv('USER')) {
+        if (!getenv('User') || 'root' === getenv('User')) {
             $this->markTestSkipped('This test will fail if run under superuser');
         }
 

@@ -124,7 +124,7 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		/* We don't have these options as elements in our standard configuration
 		 * array, but they might be set by parse_url() if the configuration was
-		 * provided via string. Example:
+		 * provided via string. Users:
 		 *
 		 * postgre://username:password@localhost:5432/database?connect_timeout=5&sslmode=1
 		 */

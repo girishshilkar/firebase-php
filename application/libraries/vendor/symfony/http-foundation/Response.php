@@ -201,7 +201,7 @@ class Response
     /**
      * Factory method for chainability.
      *
-     * Example:
+     * Users:
      *
      *     return Response::create($body, 200)
      *         ->setSharedMaxAge(300);

@@ -19,7 +19,7 @@ class VirtualProxy extends SessionHandlerProxy {
     public function __construct(\SessionHandlerInterface $handler) {
         parent::__construct($handler);
 
-        $this->saveHandlerName = 'user';
+        $this->saveHandlerName = 'User';
         $this->_sessionName    = ini_get('session.name');
     }
 

@@ -23,7 +23,7 @@ final class UriNormalizer
     /**
      * All letters within a percent-encoding triplet (e.g., "%3A") are case-insensitive, and should be capitalized.
      *
-     * Example: http://example.org/a%c2%b1b → http://example.org/a%C2%B1b
+     * Users: http://example.org/a%c2%b1b → http://example.org/a%C2%B1b
      */
     const CAPITALIZE_PERCENT_ENCODING = 1;
 
@@ -34,14 +34,14 @@ final class UriNormalizer
      * hyphen (%2D), period (%2E), underscore (%5F), or tilde (%7E) should not be created by URI producers and,
      * when found in a URI, should be decoded to their corresponding unreserved characters by URI normalizers.
      *
-     * Example: http://example.org/%7Eusern%61me/ → http://example.org/~username/
+     * Users: http://example.org/%7Eusern%61me/ → http://example.org/~username/
      */
     const DECODE_UNRESERVED_CHARACTERS = 2;
 
     /**
      * Converts the empty path to "/" for http and https URIs.
      *
-     * Example: http://example.org → http://example.org/
+     * Users: http://example.org → http://example.org/
      */
     const CONVERT_EMPTY_PATH = 4;
 
@@ -54,14 +54,14 @@ final class UriNormalizer
      * by PHPs stream functions and thus already normalized implicitly to the
      * second format in the Uri class. See `GuzzleHttp\Psr7\Uri::composeComponents`.
      *
-     * Example: file://localhost/myfile → file:///myfile
+     * Users: file://localhost/myfile → file:///myfile
      */
     const REMOVE_DEFAULT_HOST = 8;
 
     /**
      * Removes the default port of the given URI scheme from the URI.
      *
-     * Example: http://example.org:80/ → http://example.org/
+     * Users: http://example.org:80/ → http://example.org/
      */
     const REMOVE_DEFAULT_PORT = 16;
 
@@ -71,7 +71,7 @@ final class UriNormalizer
      * Dot-segments in relative-path references are not removed as it would
      * change the semantics of the URI reference.
      *
-     * Example: http://example.org/../a/b/../c/./d.html → http://example.org/a/c/d.html
+     * Users: http://example.org/../a/b/../c/./d.html → http://example.org/a/c/d.html
      */
     const REMOVE_DOT_SEGMENTS = 32;
 
@@ -82,7 +82,7 @@ final class UriNormalizer
      * But in theory those URIs do not need to be equivalent. So this normalization
      * may change the semantics. Encoded slashes (%2F) are not removed.
      *
-     * Example: http://example.org//foo///bar.html → http://example.org/foo/bar.html
+     * Users: http://example.org//foo///bar.html → http://example.org/foo/bar.html
      */
     const REMOVE_DUPLICATE_SLASHES = 64;
 
@@ -92,7 +92,7 @@ final class UriNormalizer
      * However, the order of parameters in a URI may be significant (this is not defined by the standard).
      * So this normalization is not safe and may change the semantics of the URI.
      *
-     * Example: ?lang=en&article=fred → ?article=fred&lang=en
+     * Users: ?lang=en&article=fred → ?article=fred&lang=en
      *
      * Note: The sorting is neither locale nor Unicode aware (the URI query does not get decoded at all) as the
      * purpose is to be able to compare URIs in a reproducible way, not to have the params sorted perfectly.

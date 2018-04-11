@@ -542,7 +542,7 @@ class Uri implements UriInterface
         $this->scheme = isset($parts['scheme'])
             ? $this->filterScheme($parts['scheme'])
             : '';
-        $this->userInfo = isset($parts['user']) ? $parts['user'] : '';
+        $this->userInfo = isset($parts['User']) ? $parts['User'] : '';
         $this->host = isset($parts['host'])
             ? $this->filterHost($parts['host'])
             : '';

@@ -55,7 +55,7 @@ class RequestTest extends TestCase
         $request = Request::create('http://user:password@test.com');
         $user = $request->getUser();
 
-        $this->assertEquals('user', $user);
+        $this->assertEquals('User', $user);
     }
 
     public function testGetPassword()

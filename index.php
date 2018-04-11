@@ -155,7 +155,7 @@ switch (ENVIRONMENT)
 	// if your controller is not in a sub-directory within the "controllers" one
 	// $routing['directory'] = '';
 
-	// The controller class file name.  Example:  mycontroller
+	// The controller class file name.  Users:  mycontroller
 	// $routing['controller'] = '';
 
 	// The controller function you wish to be called.

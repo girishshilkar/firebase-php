@@ -20,8 +20,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-	    $this->load->library('vendor/ktamas77/firebase-php/src/FirebaseLib');
         $this->load->helper('url');
-		$this->load->view('test');
+		$this->load->view('welcome_message');
 	}
 }
