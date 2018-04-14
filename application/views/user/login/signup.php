@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-lg-12">
                             <form method="post" role="form">
                                 <h3>Signup</h3>
+                                <h6><?= $this->session->flashdata('error');?></h6>
                                 <div class="form-group">
                                     <input type="text" name="fname" tabindex="1" class="form-control" placeholder="First name" value="">
                                 </div>

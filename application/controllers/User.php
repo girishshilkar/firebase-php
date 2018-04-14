@@ -28,8 +28,11 @@ class User extends CI_Controller
     public function signup()
     {
         if ($_POST) {
-            $url = API_URL . 'Userlogin/signup';
+            $url = API_URL . 'User/signup';
             $res = postCURL($url, $this->input->post(), 'POST');
+            if ($res->status == 0){
+                $this->session->set_flashdata('error', $res->data);
+            }
         }
         $this->load->view('user/common/header');
         $this->load->view('user/login/signup');
@@ -39,9 +42,11 @@ class User extends CI_Controller
     public function login()
     {
         if ($_POST) {
-            $url = $url = base_url('api/Userlogin/login');
+            $url = $url = base_url('api/User/login');
             $res = postCURL($url, $this->input->post(), 'POST');
             if ($res->status == 1) {
+                $this->session->set_userdata('user_id', $res->data->user_id);
+                $this->session->set_flashdata('daily_scratch', $res->data->daily_scratch);
                 redirect('user/home');
             } else {
                 $this->session->set_flashdata('error', 'Invalid credentials');
@@ -54,8 +59,11 @@ class User extends CI_Controller
     }
 
     public function home()
-    {
+	{
+
+		$this->load->view('user/common/header');
         $this->load->view('user/home');
-    }
+        $this->load->view('user/common/footer');
+	}
 
 }

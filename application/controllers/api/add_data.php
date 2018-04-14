@@ -23,7 +23,7 @@ use Kreait\Firebase\ServiceAccount;
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Main_page extends REST_Controller
+class add_data extends REST_Controller
 {
 
     function __construct()
@@ -36,35 +36,44 @@ class Main_page extends REST_Controller
             ->create();
 
         $this->database = $this->firebase->getDatabase();
+
+        $this->load->model('add_data_model');
     }
 
-
-    public function hotelbidding_get()
+    public function add_grandprize_get()
     {
-        $database = $this->firebase->getDatabase();
-        
-        #get snapshot of Hotelbidding & business table
-        $hotelbidding = $database->getReference('bidOffer')->getSnapshot();
-        $business = $database->getReference('business')->getSnapshot();
+
+        $this->add_data_model->add_grandprize();
                             
-        $list = $hotelbidding->getValue();
-
-        foreach($list as $key1=>$value1) 
-        { 
-            $temp = $hotelbidding->getChild('"'.$key1.'"')->getChild('businessId')->getValue();
-            $temp1 = $business->getChild('"'.$temp.'"')->getValue();
-
-            $list[$key1]['business_name']=$temp1['name'];
-            #echo '<br>';
-        }
-
-        #echo "<pre>";
-        #print_r($list);
-        #echo "</pre>";
-
-        $this->set_response($list, REST_Controller::HTTP_OK);
     }
 
-    
+    public function add_bidoffer_get()
+    {
+
+        $this->add_data_model->add_bidoffer();
+                            
+    }
+
+    public function add_business_get()
+    {
+
+        $this->add_data_model->add_business();
+                            
+    }
+
+    public function add_category_get()
+    {
+
+        $this->add_data_model->add_category();
+                            
+    }
+
+    public function add_city_get()
+    {
+
+        $this->add_data_model->add_city();
+                            
+    }
+
 
 }

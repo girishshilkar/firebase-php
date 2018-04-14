@@ -23,7 +23,7 @@ use Kreait\Firebase\ServiceAccount;
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Common_functions extends REST_Controller
+class Grandprize extends REST_Controller
 {
 
     function __construct()
@@ -37,30 +37,35 @@ class Common_functions extends REST_Controller
             ->create();
 
         $this->database = $this->firebase->getDatabase();
+        $this->load->model('user1_model');
         
     }
 
-    public function update_server_time_get()
-    {
-       $database = $this->firebase->getDatabase();
-       $newPost = $database
-            ->getReference('Server')
-            ->set([
-                'servertime' => time()
-            ]);
 
-        $this->set_response('Success', REST_Controller::HTTP_OK);
+
+    public function grandprize_live_get()
+    {
+        $result = $this->user1_model->fetch_grandprize_live();
+        #$this->set_response($result, REST_Controller::HTTP_OK);
         #print_r($result);
+        $this->response(array(
+                'status' => true,
+                'code' => 200,
+                'data' => $result
+            ), REST_Controller::HTTP_OK);
     }
 
-	
-	
-    public function epoch_to_datetime_get()
+    public function grandprize_upcoming_get()
     {
-        $epoch = $this->get('epoch');
-		$date = gmdate('r', $epoch);
-		$this->set_response($date, REST_Controller::HTTP_OK);
+        $result = $this->user1_model->fetch_grandprize_upcoming();
+        #$this->set_response($result, REST_Controller::HTTP_OK);
+        #print_r($result);
+        $this->response(array(
+                'status' => true,
+                'code' => 200,
+                'data' => $result
+            ), REST_Controller::HTTP_OK);
     }
+    
 
-	
 }

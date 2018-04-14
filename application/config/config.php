@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
-
+$config['base_url'] = 'http://192.168.0.107/bidwin/';
+$config['host_url'] = 'http://192.168.0.107/';
 /*
 |--------------------------------------------------------------------------
 | Index File

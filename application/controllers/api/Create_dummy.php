@@ -38,6 +38,7 @@ class Create_dummy extends REST_Controller
         $this->database = $this->firebase->getDatabase();
     }
 
+
     public function grandprize_get()
     {
         $database = $this->firebase->getDatabase();
@@ -111,7 +112,7 @@ class Create_dummy extends REST_Controller
                 'endPrice' => 10000,
                 'validityStart' => 1523793109,
                 'validityEnd' => 1523893109,
-                'StartAtTime' => 1523793109,
+                'StartAtTime' => time()+300,
                 'timerStep' => 300,
                 'priceStep' => 1000,
                 'images' => '',
@@ -131,7 +132,7 @@ class Create_dummy extends REST_Controller
                 'endPrice' => 10000,
                 'validityStart' => 1523793109,
                 'validityEnd' => 1523893109,
-                'StartAtTime' => 1523793109,
+                'StartAtTime' => time()+3000,
                 'timerStep' => 300,
                 'priceStep' => 1000,
                 'images' => '',
@@ -153,6 +154,7 @@ class Create_dummy extends REST_Controller
         #Get category Id and City Id
         $cityId = $this->getId('city','name','Panaji');
         $categoryId = $this->getId('category','name','Restaurant');
+        $categoryId1 = $this->getId('category','name','Casino');
 
         #Add Business
         $newPost = $database
@@ -172,11 +174,15 @@ class Create_dummy extends REST_Controller
         $businessId = $newPost->getKey(); 
 
         $newPost = $database
-            ->getReference('businessCategory')
-            ->push([
-                'businessId' => $businessId,
-                'categoryId' => $categoryId,
-                'status' => 0
+            ->getReference('businessCategory/'.$businessId)
+            ->set([
+                    'category' => [
+                                    $categoryId => ['Restaurant',
+                                                    'status' => 0],
+                                    $categoryId1 => ['Casino',
+                                                    'status' => 0] 
+                                ]
+
             ]);
 
 
@@ -203,15 +209,16 @@ class Create_dummy extends REST_Controller
         $businessId = $newPost->getKey(); 
 
         $newPost = $database
-            ->getReference('businessCategory')
-            ->push([
-                'businessId' => $businessId,
-                'categoryId' => $categoryId,
-                'status' => 0
+            ->getReference('businessCategory/'.$businessId)
+            ->set([
+                    'category' => [
+                                    $categoryId => ['Casino',
+                                                    'status' => 0] 
+                                ]
+
             ]);
 
     }
-
 
     public function category_get()
     {
@@ -229,6 +236,39 @@ class Create_dummy extends REST_Controller
             ]);
     }
 
+    public function scratchOffer_get()
+    {
+        $database = $this->firebase->getDatabase();
+        $newPost = $database->getReference('scratchOffer');
+
+        $newPost->push([
+                'businessId' => '-L9s5jwvyr-1sLAYn2ey',
+                'description' => '500 free chips',
+                'startDate' => '1523515025582',
+                'endDate' => '1523515025582',
+                'limit' => '5',
+                'validityStart' => '1523515025582',
+                'validityEnd' => '1523515025582',
+                'images' => '',
+                'createdDatetime' => '1523515025582',
+                'updatedDatetime' => '1523515025582',
+                'status' => 0
+            ]);
+
+        $newPost->push([
+                'businessId' => '-L9s5kWEilNKvqsLhfmp',
+                'description' => 'Free entry to casino pride',
+                'startDate' => '1523515025582',
+                'endDate' => '1523515025582',
+                'limit' => '5',
+                'validityStart' => '1523515025582',
+                'validityEnd' => '1523515025582',
+                'images' => '',
+                'createdDatetime' => '1523515025582',
+                'updatedDatetime' => '1523515025582',
+                'status' => 0
+            ]);
+    }
 
     public function city_get()
     {

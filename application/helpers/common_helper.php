@@ -29,3 +29,15 @@ function postCURL($_url, $_param, $_type)
 
     return json_decode($output);
 }
+
+//epoch to standard time
+
+function get_date($epoch)
+{
+    return date("Y-m-d", substr($epoch, 0, 10));
+}
+
+function get_date_time($epoch)
+{
+    return date("Y-m-d H:i:s", substr($epoch, 0, 10));
+}
